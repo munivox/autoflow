@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agendar serviço — Brilho Car | AutoFlow</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.booking-page{background:#f5f8fc;min-height:calc(100vh - 76px);padding:30px 0 60px}
+.booking-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start}
+.booking-main,.booking-summary{background:#fff;border:1px solid #e1e9f3;border-radius:22px;box-shadow:0 14px 40px rgba(13,42,76,.07)}
+.booking-main{padding:28px}.booking-summary{position:sticky;top:18px;overflow:hidden}
+.booking-brand{display:flex;align-items:center;gap:14px;padding-bottom:22px;border-bottom:1px solid #e8eef5}
+.booking-brand img{width:118px;height:50px;object-fit:contain;border-radius:13px}.booking-brand-copy{flex:1}.booking-brand-copy strong{font-size:17px;color:#10233f}.booking-brand-copy span{display:block;font-size:10px;color:#74839a;margin-top:4px}
+.booking-badge{display:inline-flex;align-items:center;gap:5px;background:#eaf8f5;color:#13836e;padding:7px 10px;border-radius:999px;font-size:9px;font-weight:800}
+.booking-title{margin:24px 0 5px;font-size:28px;letter-spacing:-1px;color:#0b2343}.booking-sub{margin:0 0 24px;color:#718097;font-size:12px;line-height:1.6}
+.stepper{display:flex;gap:9px;margin:0 0 25px}.step{flex:1;height:5px;background:#e8eef6;border-radius:999px}.step.active{background:linear-gradient(90deg,#087dff,#00c8ff)}
+.form-section{padding:21px 0;border-top:1px solid #edf1f6}.form-section:first-of-type{border-top:0;padding-top:0}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.section-head h2{font-size:15px;margin:0;color:#10233f}.section-head span{font-size:9px;color:#8794a6}
+.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;font-size:10px;font-weight:800;color:#34445b;margin:0 0 7px}.field input,.field select,.field textarea{width:100%;box-sizing:border-box;border:1px solid #dce6f1;border-radius:12px;padding:12px 13px;background:#fbfdff;color:#152740;outline:none;font:inherit;font-size:12px}.field input:focus,.field select:focus,.field textarea:focus{border-color:#75b8ff;box-shadow:0 0 0 3px rgba(8,125,255,.09)}
+.vehicle-card{border:1px solid #dce7f2;border-radius:14px;padding:13px;display:flex;align-items:center;gap:12px;background:#fbfdff}.vehicle-icon{width:42px;height:42px;border-radius:12px;background:#eaf4ff;color:#087dff;display:grid;place-items:center;font-size:20px}.vehicle-card strong{font-size:12px}.vehicle-card small{display:block;color:#77869a;font-size:9px;margin-top:4px}.change{margin-left:auto;color:#087dff;font-size:9px;font-weight:800}
+.option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.option{border:1px solid #dce6f1;border-radius:13px;padding:12px;background:#fff;cursor:pointer}.option.active{border-color:#087dff;background:#f2f8ff;box-shadow:0 0 0 2px rgba(8,125,255,.07)}.option strong{display:block;font-size:11px;color:#17304e}.option small{display:block;color:#7a889a;font-size:8px;margin-top:5px;line-height:1.4}
+.addons{display:grid;gap:9px}.addon{display:flex;align-items:center;gap:10px;border:1px solid #e0e8f2;border-radius:12px;padding:11px 12px}.addon input{accent-color:#087dff}.addon-main{flex:1}.addon-main strong{font-size:10px}.addon-main small{display:block;color:#7a8798;font-size:8px;margin-top:3px}.addon-price{font-size:10px;font-weight:800;color:#10233f}
+.upload-box{border:1px dashed #a9c6e5;border-radius:14px;padding:19px;text-align:center;background:#f8fbff;color:#6e7f94;font-size:10px;line-height:1.5}.upload-box strong{display:block;color:#087dff;font-size:11px;margin-bottom:4px}
+.booking-actions{display:flex;justify-content:space-between;align-items:center;gap:14px;border-top:1px solid #e8eef5;padding-top:20px;margin-top:5px}.total-label{font-size:9px;color:#8190a3}.total-value{font-size:24px;font-weight:900;color:#0b2343;margin-top:3px}.primary-book{border:0;background:linear-gradient(135deg,#087dff,#00bfff);color:#fff;border-radius:13px;padding:14px 20px;font-weight:800;font-size:11px;cursor:pointer;box-shadow:0 10px 25px rgba(8,125,255,.22)}
+.summary-head{padding:22px;background:linear-gradient(135deg,#061a38,#0b55a8);color:#fff}.summary-head small{font-size:9px;color:#bcd2ea}.summary-head h2{font-size:19px;margin:5px 0}.summary-body{padding:18px}.summary-row{display:flex;justify-content:space-between;gap:15px;padding:9px 0;font-size:10px;color:#62738a}.summary-row strong{color:#1b2d47}.summary-total{border-top:1px solid #e6edf5;margin-top:8px;padding-top:15px;display:flex;justify-content:space-between}.summary-total strong{font-size:19px;color:#0b2343}.secure-note{margin-top:15px;padding:11px;border-radius:12px;background:#f0faf7;color:#197e6b;font-size:9px;line-height:1.5}.company-mini{display:flex;gap:10px;align-items:center;margin-bottom:15px}.company-mini img{width:54px;height:40px;object-fit:contain;border-radius:10px;background:#071a36}.company-mini strong{font-size:11px}.company-mini small{display:block;color:#8190a3;font-size:8px;margin-top:3px}
+@media(max-width:900px){.booking-layout{grid-template-columns:1fr}.booking-summary{position:static}.option-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.booking-page{padding:16px 0 35px}.booking-main{padding:18px;border-radius:18px}.booking-brand img{width:96px}.booking-title{font-size:23px}.booking-grid,.option-grid{grid-template-columns:1fr}.booking-actions{align-items:stretch;flex-direction:column}.booking-actions .primary-book{width:100%}.booking-summary{border-radius:18px}.booking-brand-copy strong{font-size:14px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="container topline"><button class="menu-trigger" data-menu><span></span><span></span><span></span></button><a class="brand" href="index.html"><img src="assets/autoflow-logo.png" alt="AutoFlow"></a><div style="margin-left:auto;color:#667085;font-size:11px">Agendamento seguro</div></div></header>
+<main class="booking-page">
+<div class="container booking-layout">
+<section class="booking-main">
+  <div class="booking-brand">
+    <img src="assets/company-brilho-car.svg" alt="Logo Brilho Car">
+    <div class="booking-brand-copy"><strong>Brilho Car Lava-Car</strong><span>Empresa verificada · 4,9 ★ · 126 avaliações · 2,1 km</span></div>
+    <span class="booking-badge">✓ Verificada</span>
+  </div>
+  <h1 class="booking-title">Agende seu serviço</h1>
+  <p class="booking-sub">Tudo pronto. Escolha seu veículo, horário e adicionais. O AutoFlow confirma a disponibilidade antes do pagamento.</p>
+  <div class="stepper"><span class="step active"></span><span class="step active"></span><span class="step"></span></div>
+
+  <div class="form-section">
+    <div class="section-head"><h2>1. Seus dados</h2><span>Obrigatório</span></div>
+    <div class="booking-grid">
+      <div class="field"><label>Nome completo</label><input placeholder="Como devemos chamar você?"></div>
+      <div class="field"><label>WhatsApp</label><input placeholder="(13) 99999-9999"></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-head"><h2>2. Seu veículo</h2><span>Selecione ou cadastre</span></div>
+    <div class="vehicle-card"><div class="vehicle-icon">🚗</div><div><strong>Honda Civic · ABC1D23</strong><small>2022 · Preto · Sedan</small></div><a class="change" href="#">Trocar veículo</a></div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-head"><h2>3. Serviço e horário</h2><span>Disponibilidade atual</span></div>
+    <div class="booking-grid">
+      <div class="field"><label>Serviço</label><select><option>Lavagem completa — R$ 79,90</option><option>Higienização interna — R$ 149,90</option><option>Polimento e cristalização — R$ 199,90</option></select></div>
+      <div class="field"><label>Data</label><input type="date"></div>
+    </div>
+    <div style="margin-top:14px" class="option-grid">
+      <div class="option active"><strong>09:00</strong><small>Previsão de entrega 10:10</small></div>
+      <div class="option"><strong>10:30</strong><small>Previsão de entrega 11:40</small></div>
+      <div class="option"><strong>13:30</strong><small>Previsão de entrega 14:40</small></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-head"><h2>4. Adicionais</h2><span>Opcional</span></div>
+    <div class="addons">
+      <label class="addon"><input type="checkbox"><span class="addon-main"><strong>Proteção de vidros</strong><small>Mais proteção e facilidade na limpeza.</small></span><span class="addon-price">+ R$ 29,90</span></label>
+      <label class="addon"><input type="checkbox"><span class="addon-main"><strong>Aromatizante premium</strong><small>Escolha uma fragrância no atendimento.</small></span><span class="addon-price">+ R$ 9,90</span></label>
+      <label class="addon"><input type="checkbox"><span class="addon-main"><strong>Pretinho premium</strong><small>Acabamento dos pneus.</small></span><span class="addon-price">+ R$ 12,90</span></label>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-head"><h2>5. Entrega do veículo</h2><span>Escolha uma opção</span></div>
+    <div class="option-grid">
+      <div class="option active"><strong>Vou buscar</strong><small>Retire na unidade quando estiver pronto.</small></div>
+      <div class="option"><strong>Entregar em casa</strong><small>Disponível para esta região.</small></div>
+      <div class="option"><strong>Entregar no trabalho</strong><small>Combine o endereço no próximo passo.</small></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-head"><h2>6. Fotos e observações</h2><span>Opcional</span></div>
+    <div class="upload-box"><strong>Adicionar fotos do veículo</strong>Envie imagens de danos ou detalhes que devemos conhecer antes do atendimento.<br>JPG, PNG · até 10 MB por imagem</div>
+    <div class="field" style="margin-top:12px"><label>Observações</label><textarea rows="3" placeholder="Algum cuidado especial, detalhe ou informação para a equipe?"></textarea></div>
+  </div>
+
+  <div class="booking-actions"><div><div class="total-label">Total estimado</div><div class="total-value">R$ 79,90</div></div><button class="primary-book" onclick="location.href='manual.html#pagamento'">Continuar para pagamento →</button></div>
+</section>
+
+<aside class="booking-summary">
+  <div class="summary-head"><small>RESUMO DO AGENDAMENTO</small><h2>Lavagem completa</h2><span style="font-size:10px;color:#d7e8fb">aprox. 70 minutos</span></div>
+  <div class="summary-body">
+    <div class="company-mini"><img src="assets/company-brilho-car.svg" alt="Brilho Car"><div><strong>Brilho Car Lava-Car</strong><small>Registro, SP · 08:00–18:00</small></div></div>
+    <div class="summary-row"><span>Serviço</span><strong>R$ 79,90</strong></div>
+    <div class="summary-row"><span>Data e horário</span><strong>A definir</strong></div>
+    <div class="summary-row"><span>Adicionais</span><strong>R$ 0,00</strong></div>
+    <div class="summary-total"><span>Total</span><strong>R$ 79,90</strong></div>
+    <div class="secure-note">✓ Pagamento protegido<br>✓ Confirmação de disponibilidade<br>✓ Acompanhamento do serviço pelo AutoFlow</div>
+  </div>
+</aside>
+</div></main>
+<footer class="footer detail-footer"><div class="container footer-grid"><div><a class="brand" href="index.html"><img src="assets/autoflow-logo.png" alt="AutoFlow"></a><p style="font-size:10px;line-height:1.7;color:#9eb0c8;max-width:300px;margin:12px 0 0">Marketplace e gestão para empresas automotivas.</p></div><div class="footer-col"><strong>AutoFlow</strong><a href="index.html">Início</a><a href="busca.html">Buscar empresas</a><a href="manual.html">Ajuda</a></div><div class="footer-col"><strong>Para empresas</strong><a href="cadastro.html">Cadastrar empresa</a><a href="cadastro.html#planos">Planos</a><a href="marketing.html">Marketing</a></div><div class="footer-col"><strong>Pagamento seguro</strong><div class="payment-strip"><span class="pay-chip pix">PIX</span><span class="pay-chip visa">VISA</span><span class="pay-chip mastercard" aria-label="Mastercard"></span><span class="pay-chip elo">elo</span></div><div class="trust-seal">🔒 <span><b>Compra protegida</b><br>Pagamento processado com segurança</span></div></div></div><div class="footer-bottom"><div class="container">AutoFlow · Munivox · Termos de uso · Privacidade</div></div></footer>
+<div class="side-backdrop" data-backdrop></div><aside class="side-menu" data-menu-panel><div class="side-menu-head"><div class="side-profile"><div class="side-avatar">◯</div><div><strong>Meu perfil</strong><small>Entre para acessar seus agendamentos</small></div><button class="side-close" data-close-menu>×</button></div></div><div class="side-promo"><div><strong>AutoFlow+</strong><br><span>Benefícios e ofertas</span></div><b>›</b></div><nav class="side-nav"><a href="index.html"><span class="side-icon">⌂</span>Início</a><a href="busca.html"><span class="side-icon">⌕</span>Buscar</a><a href="#"><span class="side-icon">♧</span>Notificações</a><a href="#"><span class="side-icon">▣</span>Meus agendamentos</a><a href="#"><span class="side-icon">♡</span>Favoritos</a><a href="busca.html"><span class="side-icon">%</span>Ofertas</a><a href="#"><span class="side-icon">▤</span>Pagamentos</a><a href="#"><span class="side-icon">◷</span>Histórico</a><a href="cadastro.html"><span class="side-icon">⌂</span>Para empresas</a><a href="manual.html"><span class="side-icon">?</span>Ajuda</a></nav><div class="side-menu-foot">AutoFlow · Seu carro em boas mãos</div></aside>
+<script src="assets/app.js"></script>
+</body></html>

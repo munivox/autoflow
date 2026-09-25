@@ -1,0 +1,33 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente e credenciais
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+logs/
+
+# Arquivos do sistema operacional
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Configurações de editores
+.vscode/
+.idea/
+
+# Arquivos gerados
+dist/
+build/
+.cache/

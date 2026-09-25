@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 150" role="img" aria-label="AutoFlow">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#168BFF"/><stop offset="1" stop-color="#00C8FF"/></linearGradient></defs>
+<g transform="translate(8 8)"><path d="M65 125 126 12c5-10 20-10 25 0l55 113h-39l-19-40H97l-20 40z" fill="url(#g)"/><path d="M90 72c30-11 57-10 83 0" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/><path d="M106 88c25-7 47-6 67 1" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".9"/></g>
+<text x="205" y="92" font-family="Arial,Helvetica,sans-serif" font-size="66" font-weight="800" fill="#fff">Auto</text><text x="365" y="92" font-family="Arial,Helvetica,sans-serif" font-size="66" font-weight="800" fill="url(#g)">Flow</text>
+<text x="208" y="124" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing="5" fill="#dcecff">SEU CARRO EM BOAS MÃOS</text></svg>
