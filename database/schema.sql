@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS autoflow CHARACTER SET utf8mb4 COLLATE utf8mb4_uni
 USE autoflow;
 
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS analytics_events, audit_logs, marketing_leads, marketing_service_orders, marketing_campaigns, ad_placements, notification_events, disputes, refunds, payment_splits, payments, subscriptions, plans, reviews, order_status_history, order_items, orders, quote_items, quotes, appointment_status_history, appointments, service_addons, service_packages, service_media, services, company_files, company_media, vehicles, customers, user_roles, users, roles, branches, companies;
+DROP TABLE IF EXISTS audit_logs, marketing_leads, marketing_service_orders, marketing_campaigns, ad_placements, notification_events, disputes, refunds, payment_splits, payments, subscriptions, plans, reviews, order_status_history, order_items, orders, quote_items, quotes, appointment_status_history, appointments, service_addons, service_packages, service_media, services, company_files, company_media, vehicles, customers, user_roles, users, roles, branches, companies;
 SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE companies (
@@ -465,23 +465,6 @@ CREATE TABLE marketing_service_orders (
   FOREIGN KEY (lead_id) REFERENCES marketing_leads(id),
   FOREIGN KEY (company_id) REFERENCES companies(id),
   INDEX idx_marketing_order_company (company_id,status)
-) ENGINE=InnoDB;
-
-CREATE TABLE analytics_events (
-  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT UNSIGNED NULL,
-  company_id BIGINT UNSIGNED NULL,
-  event_type VARCHAR(60) NOT NULL,
-  entity_type VARCHAR(60) NULL,
-  entity_id BIGINT UNSIGNED NULL,
-  session_id VARCHAR(100) NULL,
-  metadata JSON NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (company_id) REFERENCES companies(id),
-  INDEX idx_analytics_type_date (event_type,created_at),
-  INDEX idx_analytics_company_date (company_id,created_at),
-  INDEX idx_analytics_entity (entity_type,entity_id,created_at)
 ) ENGINE=InnoDB;
 
 CREATE TABLE audit_logs (

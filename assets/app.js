@@ -26,3 +26,61 @@
  };
  add.addEventListener('click',open); update();
 })();
+
+// V16 — parallax/tilt nos cards, revelação ao rolar e parallax do banner principal
+(function(){
+  const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia && matchMedia('(hover:hover)').matches;
+
+  // Tilt 3D nos cards ao mover o mouse
+  if(!reduceMotion && canHover){
+    document.querySelectorAll('[data-tilt]').forEach(function(card){
+      const max = 5;
+      let raf = null;
+      card.addEventListener('mousemove', function(e){
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        if(raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(function(){
+          card.style.transform = 'perspective(900px) rotateX(' + (-py * max) + 'deg) rotateY(' + (px * max) + 'deg) translateY(-4px)';
+        });
+      });
+      card.addEventListener('mouseleave', function(){
+        if(raf) cancelAnimationFrame(raf);
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // Revelação suave dos elementos ao entrar na tela
+  const revealEls = document.querySelectorAll('.reveal');
+  if(revealEls.length){
+    if('IntersectionObserver' in window && !reduceMotion){
+      const io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+        });
+      }, {threshold: .12, rootMargin: '0px 0px -40px 0px'});
+      revealEls.forEach(function(el){ io.observe(el); });
+    } else {
+      revealEls.forEach(function(el){ el.classList.add('in'); });
+    }
+  }
+
+  // Parallax leve na foto do banner principal ao rolar
+  const heroPhoto = document.querySelector('.af-hero-photo');
+  if(heroPhoto && !reduceMotion){
+    let ticking = false;
+    window.addEventListener('scroll', function(){
+      if(!ticking){
+        requestAnimationFrame(function(){
+          const y = Math.min(window.scrollY * 0.18, 90);
+          heroPhoto.style.transform = 'translateY(' + y + 'px) scale(1.06)';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, {passive:true});
+  }
+})();

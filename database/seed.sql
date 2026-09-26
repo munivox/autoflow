@@ -1,5 +1,5 @@
 USE autoflow;
-INSERT INTO roles(name) VALUES ('platform_admin'),('customer'),('company_admin'),('manager'),('attendant'),('washer'),('driver'),('financial');
+INSERT INTO roles(name) VALUES ('administrator'),('manager'),('attendant'),('washer'),('driver'),('financial');
 INSERT INTO plans(name,description,monthly_price,commission_rate,features) VALUES
 ('AutoFlow','Plataforma completa sem mensalidade; comissão por serviço realizado.',0.00,8.00,'{"reviews":true,"profile":true,"booking":true,"metrics":true,"internal_marketing":false,"external_marketing":false}'),
 ('AutoFlow Destaque','Plataforma completa com maior visibilidade e marketing interno dentro do AutoFlow.',0.00,12.00,'{"reviews":true,"profile":true,"booking":true,"metrics":true,"internal_marketing":true,"sponsored_search":true,"banners":true,"external_marketing":false}');
